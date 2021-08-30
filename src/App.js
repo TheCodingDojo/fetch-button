@@ -18,7 +18,11 @@ function App() {
         }
         return res.json();
       })
-      .then((resData) => setData(resData))
+      .then((resData) => {
+        setData(resData);
+        // In case of a prior error.
+        setError(null);
+      })
       .catch((err) => setError(err));
   };
 
