@@ -1,4 +1,4 @@
-const BTCData = ({ data }) => {
+const BTCData = ({ data, style }) => {
   if (!data) {
     return null;
   }
@@ -10,15 +10,17 @@ const BTCData = ({ data }) => {
     bpi: { USD, GBP, EUR },
   } = data;
 
-  // If this were a larger project, CSS-in-js libraries would be used.
-  const style = {
+  const baseStyle = {
     borderRadius: 5,
     padding: 15,
     backgroundColor: "lavender",
+    boxShadow:
+      "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
   };
 
   return (
-    <div style={style}>
+    // Merge incoming additional / override styles.
+    <div style={{ ...baseStyle, ...style }}>
       <h2>{chartName}</h2>
       <small>{updated}</small>
       <p>{disclaimer}</p>
