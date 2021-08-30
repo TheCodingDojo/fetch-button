@@ -9,8 +9,11 @@ function App() {
   const [prevData, setPrevData] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFetchClick = (_e) => {
+    setLoading(true);
+
     // fetch("http://httpstat.us/500") // error test
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => {
@@ -28,7 +31,13 @@ function App() {
         // Clear any prior error.
         setError(null);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // Loading stops both on success and fail.
+        setLoading(false);
+      });
   };
 
   const fetchBtnText = data || error ? "Refresh Data" : "Fetch Data";
@@ -47,15 +56,24 @@ function App() {
   // If this were a larger project, I would use a CSS-in-js library.
   return (
     <div style={{ maxWidth: "85%", margin: "0 auto", paddingTop: 20 }}>
-      <button
-        onClick={handleFetchClick}
-        style={{
-          padding: 5,
-          fontSize: 20,
-        }}
-      >
-        {fetchBtnText}
-      </button>
+      {loading ? (
+        <img
+          src="https://i.gifer.com/ZZ5H.gif"
+          alt="loading"
+          width="40px"
+          height="40px"
+        />
+      ) : (
+        <button
+          onClick={handleFetchClick}
+          style={{
+            padding: 5,
+            fontSize: 22,
+          }}
+        >
+          {fetchBtnText}
+        </button>
+      )}
 
       <div
         style={{
