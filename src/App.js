@@ -10,6 +10,7 @@ function App() {
   const [error, setError] = useState(null);
 
   const handleFetchClick = (_e) => {
+    // fetch("http://httpstat.us/500") // error test
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => {
         if (!res.ok) {
@@ -19,7 +20,7 @@ function App() {
       })
       .then((resData) => {
         setData(resData);
-        // In case of a prior error.
+        // Clear any prior error.
         setError(null);
       })
       .catch((err) => setError(err));

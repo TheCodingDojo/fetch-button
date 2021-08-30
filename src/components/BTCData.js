@@ -3,18 +3,19 @@ const BTCData = ({ data }) => {
     return null;
   }
 
-  const style = {
-    borderRadius: 5,
-    padding: 15,
-    backgroundColor: "lavender",
-  };
-
   const {
     time: { updated },
     disclaimer,
     chartName,
     bpi: { USD, GBP, EUR },
   } = data;
+
+  // If this were a larger project, CSS-in-js libraries would be used.
+  const style = {
+    borderRadius: 5,
+    padding: 15,
+    backgroundColor: "lavender",
+  };
 
   return (
     <div style={style}>
