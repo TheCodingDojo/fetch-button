@@ -6,6 +6,7 @@ import BTCData from "./components/BTCData";
 import DisplayError from "./components/DisplayError";
 
 function App() {
+  const [prevData, setPrevData] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -19,6 +20,10 @@ function App() {
         return res.json();
       })
       .then((resData) => {
+        if (data) {
+          setPrevData(data);
+        }
+
         setData(resData);
         // Clear any prior error.
         setError(null);
@@ -29,9 +34,10 @@ function App() {
   const fetchBtnText = data || error ? "Refresh Data" : "Fetch Data";
 
   return (
-    <div>
+    <div style={{ maxWidth: "85%", margin: "0 auto", paddingTop: 20 }}>
       <button onClick={handleFetchClick}>{fetchBtnText}</button>
 
+      <BTCData data={prevData} />
       <BTCData data={data} />
       <DisplayError error={error} />
     </div>
