@@ -1,5 +1,5 @@
 const BTCData = ({ data }) => {
-  if (!data === null) {
+  if (!data) {
     return null;
   }
 
