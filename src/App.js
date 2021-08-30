@@ -12,7 +12,6 @@ function App() {
   const handleFetchClick = (_e) => {
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => {
-        console.log(res);
         if (!res.ok) {
           throw new Error(res.statusText);
         }
